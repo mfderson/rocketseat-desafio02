@@ -1,4 +1,4 @@
-import { Model, Sequelize } from 'sequelize';
+import Sequelize, { Model } from 'sequelize';
 
 class User extends Model {
   // Este método é chamado automaticamente pelo sequelize
