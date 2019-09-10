@@ -27,7 +27,7 @@ module.exports = {
     });
   },
 
-  down: (queryInterface, sequelize) => {
+  down: queryInterface => {
     return queryInterface.dropTable('files');
   },
 };
