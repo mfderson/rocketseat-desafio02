@@ -1,4 +1,6 @@
 import { Op } from 'sequelize';
+import { format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import Meetup from '../models/Meetup';
 import User from '../models/User';
 import Subscription from '../models/Subscription';
@@ -73,7 +75,13 @@ class SubscriptionController {
     await Mail.sendMail({
       to: `${meetup.user.name} <${meetup.user.email}>`,
       subject: 'Nova inscrição no meetup',
-      text: 'Você tem um novo inscrito',
+      template: 'subscription',
+      context: {
+        speaker: meetup.user.name,
+        registered: user.name,
+        meetup: meetup.title,
+        date: format(meetup.date, "dd 'de' MMMM 'de' yyyy", { locale: pt }),
+      },
     });
 
     return res.json(subscription);
